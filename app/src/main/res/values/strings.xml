@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Android SQLite</string>
+    <string name="nama_mahasiswa">Nama Mahasiswa</string>
+    <string name="nim">NIM</string>
+    <string name="jurusan">Jurusan</string>
+    <string name="latlong">Latlong</string>
+    <string name="network_connection">Network Connection</string>
+    <string name="save">Save</string>
+    <string name="update">Update</string>
+</resources>
