@@ -77,6 +77,7 @@ public class FormActivity extends AppCompatActivity {
                 getCurrentLocation();
             } else {
                 Toast.makeText(this, "Akses ditolak!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
