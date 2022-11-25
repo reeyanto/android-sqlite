@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.reeyanto.androidsqlite.models.Analyze;
 import com.reeyanto.androidsqlite.models.Mahasiswa;
 
 import java.util.ArrayList;
@@ -71,6 +72,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         reader.close();
         return mahasiswas;
+    }
+
+    public ArrayList<Analyze> getAnalyze() {
+        ArrayList<Analyze> analyzeArrayList = new ArrayList<>();
+//        String sql = "SELECT " + COLUMN_JURUSAN;
+//                sql+= ", COUNT(" + COLUMN_JURUSAN +") as jumlah ";
+//                sql+= "FROM "+ TABLE_NAME;
+//                sql+= "GROUP BY "+ COLUMN_JURUSAN;
+
+        String sql = "SELECT jurusan, count(jurusan) as jumlah FROM mahasiswa GROUP BY jurusan";
+
+        SQLiteDatabase reader = this.getReadableDatabase();
+        Cursor cursor = reader.rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                Analyze analyze = new Analyze(cursor.getString(0), cursor.getString(1));
+                analyzeArrayList.add(analyze);
+            }
+        }
+        cursor.close();
+        reader.close();
+        return analyzeArrayList;
     }
 
     private ContentValues setData(Mahasiswa mahasiswa) {
