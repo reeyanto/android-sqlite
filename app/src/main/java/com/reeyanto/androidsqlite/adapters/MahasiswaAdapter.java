@@ -1,6 +1,7 @@
 package com.reeyanto.androidsqlite.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.reeyanto.androidsqlite.FormActivity;
 import com.reeyanto.androidsqlite.MainActivity;
 import com.reeyanto.androidsqlite.R;
 import com.reeyanto.androidsqlite.helpers.DatabaseHelper;
@@ -52,6 +54,12 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
             if(db.deleteMahasiswa(mahasiswaList.get(position)) > 0) {
                 Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        holder.btnEdit.setOnClickListener(view -> {
+            Intent intent = new Intent(context, FormActivity.class);
+            intent.putExtra("EDIT_USER", mahasiswaList.get(position));
+            context.startActivity(intent);
         });
     }
 

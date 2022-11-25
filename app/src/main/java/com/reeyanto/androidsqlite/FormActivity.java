@@ -35,10 +35,24 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
 
         initComponents();
-        btnSave.setOnClickListener(view -> saveData());
+        btnSave.setOnClickListener(view -> saveData(false));
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getCurrentLocation();
+
+        // apakah sedang edit?
+        if (isEditMode()) {
+            Mahasiswa mahasiswa = getIntent().getParcelableExtra("EDIT_USER");
+            etNim.setText(mahasiswa.getNim());
+            etNama.setText(mahasiswa.getNama());
+            etJurusan.setText(mahasiswa.getJurusan());
+            
+            btnSave.setOnClickListener(view -> saveData(true));
+        }
+    }
+
+    private boolean isEditMode() {
+        return getIntent().hasExtra("EDIT_USER");
     }
 
     public String getNetworkConnection() {
@@ -84,13 +98,18 @@ public class FormActivity extends AppCompatActivity {
         }
     }
 
-    private void saveData() {
+    private void saveData(@Nullable boolean isEditMode) {
         if (validation()) {
             DatabaseHelper db = new DatabaseHelper(this);
             Mahasiswa mahasiswa = new Mahasiswa(nim, nama, jurusan, latitude, longitude, "");
 
-            if (db.insertMahasiswa(mahasiswa) > 0) Toast.makeText(this, "Data berhasil disimpan", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(this, "Data gagal disimpan", Toast.LENGTH_SHORT).show();
+            if (isEditMode) {
+                if (db.updateMahasiswa(mahasiswa) > 0) Toast.makeText(this, "Data berhasil diubah", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(this, "Data gagal diubah", Toast.LENGTH_SHORT).show();
+            } else {
+                if (db.insertMahasiswa(mahasiswa) > 0) Toast.makeText(this, "Data berhasil disimpan", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(this, "Data gagal disimpan", Toast.LENGTH_SHORT).show();
+            }
 
             db.close();
             finish();
