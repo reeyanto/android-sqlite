@@ -44,10 +44,10 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
     @Override
     public void onBindViewHolder(@NonNull MahasiswaAdapter.ViewHolder holder, int position) {
         mahasiswa = mahasiswaList.get(position);
-        holder.tvNim.setText(mahasiswa.getNim());
         holder.tvNama.setText(mahasiswa.getNama());
-        holder.tvJurusan.setText(mahasiswa.getJurusan());
-        holder.tvLatLong.setText(String.format("%s, %s", mahasiswa.getLatitude().toString(), mahasiswa.getLongtitude().toString()));
+        holder.tvNim.setText(String.format("%s\t\t\t: %s", "NIM", mahasiswa.getNim()));
+        holder.tvJurusan.setText(String.format("%s\t\t: %s", "Jurusan", mahasiswa.getJurusan()));
+        holder.tvLatLong.setText(String.format("%s\t\t: %s, %s", "LatLong", mahasiswa.getLatitude().toString(), mahasiswa.getLongtitude().toString()));
 
         holder.btnDelete.setOnClickListener(view -> {
             DatabaseHelper db = new DatabaseHelper(context);

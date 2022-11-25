@@ -22,7 +22,7 @@ import com.reeyanto.androidsqlite.models.Mahasiswa;
 
 public class FormActivity extends AppCompatActivity {
 
-    private EditText etNim, etNama, etJurusan;
+    private EditText etNim, etNama, etJurusan, etLatitude, etLongitude;
     private Button btnSave;
     private String nim, nama, jurusan;
     private double latitude = 0.0, longitude = 0.0;
@@ -46,6 +46,8 @@ public class FormActivity extends AppCompatActivity {
             etNim.setText(mahasiswa.getNim());
             etNama.setText(mahasiswa.getNama());
             etJurusan.setText(mahasiswa.getJurusan());
+            etLatitude.setText(String.valueOf(mahasiswa.getLatitude()));
+            etLongitude.setText(String.valueOf(mahasiswa.getLongtitude()));
             
             btnSave.setOnClickListener(view -> saveData(true));
         }
@@ -70,6 +72,9 @@ public class FormActivity extends AppCompatActivity {
                 if (location != null) {
                     latitude = location.getLatitude();
                     longitude= location.getLongitude();
+
+                    etLatitude.setText(String.valueOf(latitude));
+                    etLongitude.setText(String.valueOf(longitude));
                 }
             });
         }
@@ -135,6 +140,8 @@ public class FormActivity extends AppCompatActivity {
         etNim = findViewById(R.id.et_nim);
         etNama = findViewById(R.id.et_nama);
         etJurusan = findViewById(R.id.et_jurusan);
+        etLatitude = findViewById(R.id.et_latitude);
+        etLongitude = findViewById(R.id.et_longitude);
 
         btnSave = findViewById(R.id.btnSave);
     }

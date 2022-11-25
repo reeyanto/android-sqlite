@@ -9,4 +9,8 @@
     <string name="update">Update</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="maps">Maps</string>
+    <string name="analyze">Analyze</string>
 </resources>

@@ -1,11 +1,14 @@
 package com.reeyanto.androidsqlite;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.reeyanto.androidsqlite.adapters.MahasiswaAdapter;
@@ -19,6 +22,20 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rvMahasiswa;
     private FloatingActionButton fabAdd;
     private ArrayList<Mahasiswa> mahasiswaList;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.option_menu_analyze) {
+            startActivity(new Intent(this, AnalyzeActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
