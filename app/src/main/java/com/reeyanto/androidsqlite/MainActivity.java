@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.reeyanto.androidsqlite.adapters.MahasiswaAdapter;
@@ -20,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rvMahasiswa;
     private FloatingActionButton fabAdd;
     private ArrayList<Mahasiswa> mahasiswaList;
-
-    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

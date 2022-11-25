@@ -81,7 +81,6 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
             tvNama = view.findViewById(R.id.tv_nama);
             tvJurusan = view.findViewById(R.id.tv_jurusan);
             tvLatLong = view.findViewById(R.id.tv_lat_long);
-            tvNetworkConnection = view.findViewById(R.id.tv_network_connection);
             cardView = view.findViewById(R.id.cardView);
 
             btnEdit = view.findViewById(R.id.btnEdit);

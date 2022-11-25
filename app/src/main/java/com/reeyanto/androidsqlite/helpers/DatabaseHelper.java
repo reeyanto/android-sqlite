@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // db and table name
-    private static final String DB_NAME = "akademik";
+    private static final String DB_NAME = "akademik_ujikom";
     private static final String TABLE_NAME = "mahasiswa";
 
     // columns
@@ -24,7 +24,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_JURUSAN = "jurusan";
     private static final String COLUMN_LATITUDE = "latitude";
     private static final String COLUMN_LONGTITUDE = "longtitude";
-    private static final String COLUMN_MOBILE_CONNECTION = "mobile_connection";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, 1);
@@ -38,8 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                sql+= COLUMN_NAMA + " TEXT NOT NULL,";
                sql+= COLUMN_JURUSAN + " TEXT NOT NULL,";
                sql+= COLUMN_LATITUDE + " REAL,";
-               sql+= COLUMN_LONGTITUDE + " REAL,";
-               sql+= COLUMN_MOBILE_CONNECTION + " TEXT";
+               sql+= COLUMN_LONGTITUDE + " REAL";
                sql+= ")";
 
        sqLiteDatabase.execSQL(sql);
@@ -65,8 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getDouble(3),
-                        cursor.getDouble(4),
-                        cursor.getString(5)
+                        cursor.getDouble(4)
                 );
                 mahasiswas.add(mahasiswa);
             }
@@ -84,7 +81,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_JURUSAN, mahasiswa.getJurusan());
         values.put(COLUMN_LATITUDE, mahasiswa.getLatitude());
         values.put(COLUMN_LONGTITUDE, mahasiswa.getLongtitude());
-        values.put(COLUMN_MOBILE_CONNECTION, mahasiswa.getMobileConnection());
 
         return values;
     }

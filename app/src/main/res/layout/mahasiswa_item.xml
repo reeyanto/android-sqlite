@@ -48,20 +48,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/tv_network_connection"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_lat_long"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/network_connection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
         <Button
             android:id="@+id/btnEdit"
             android:text="@string/edit"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_network_connection"
+            app:layout_constraintTop_toBottomOf="@id/tv_lat_long"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -69,7 +60,7 @@
             android:id="@+id/btnDelete"
             android:text="@string/delete"
             app:layout_constraintStart_toEndOf="@id/btnEdit"
-            app:layout_constraintTop_toBottomOf="@id/tv_network_connection"
+            app:layout_constraintTop_toBottomOf="@id/tv_lat_long"
             android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

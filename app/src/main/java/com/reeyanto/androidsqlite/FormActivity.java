@@ -55,16 +55,6 @@ public class FormActivity extends AppCompatActivity {
         return getIntent().hasExtra("EDIT_USER");
     }
 
-    public String getNetworkConnection() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-//        if (networkInfo == null || !networkInfo.isConnected()) {
-//            return null;
-//        } else if (networkInfo.)
-        return null;
-    }
-
 
     private void getCurrentLocation() {
         if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) &&
@@ -101,7 +91,7 @@ public class FormActivity extends AppCompatActivity {
     private void saveData(@Nullable boolean isEditMode) {
         if (validation()) {
             DatabaseHelper db = new DatabaseHelper(this);
-            Mahasiswa mahasiswa = new Mahasiswa(nim, nama, jurusan, latitude, longitude, "");
+            Mahasiswa mahasiswa = new Mahasiswa(nim, nama, jurusan, latitude, longitude);
 
             if (isEditMode) {
                 if (db.updateMahasiswa(mahasiswa) > 0) Toast.makeText(this, "Data berhasil diubah", Toast.LENGTH_SHORT).show();

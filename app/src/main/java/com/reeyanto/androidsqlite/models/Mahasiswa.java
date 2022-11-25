@@ -7,15 +7,13 @@ public class Mahasiswa implements Parcelable {
 
     private String nim, nama, jurusan;
     private Double latitude, longtitude;
-    private String mobileConnection;
 
-    public Mahasiswa(String nim, String nama, String jurusan, Double latitude, Double longtitude, String mobileConnection) {
+    public Mahasiswa(String nim, String nama, String jurusan, Double latitude, Double longtitude) {
         this.nim = nim;
         this.nama = nama;
         this.jurusan = jurusan;
         this.latitude = latitude;
         this.longtitude = longtitude;
-        this.mobileConnection = mobileConnection;
     }
 
     protected Mahasiswa(Parcel in) {
@@ -32,7 +30,6 @@ public class Mahasiswa implements Parcelable {
         } else {
             longtitude = in.readDouble();
         }
-        mobileConnection = in.readString();
     }
 
     public static final Creator<Mahasiswa> CREATOR = new Creator<Mahasiswa>() {
@@ -67,10 +64,6 @@ public class Mahasiswa implements Parcelable {
         return longtitude;
     }
 
-    public String getMobileConnection() {
-        return mobileConnection;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -93,6 +86,5 @@ public class Mahasiswa implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeDouble(longtitude);
         }
-        parcel.writeString(mobileConnection);
     }
 }
