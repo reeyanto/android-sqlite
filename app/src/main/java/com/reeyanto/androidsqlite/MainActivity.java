@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setRecyclerView() {
-        rvMahasiswa.setHasFixedSize(true);
+        rvMahasiswa.setHasFixedSize(false);
         rvMahasiswa.setAdapter(new MahasiswaAdapter(this, mahasiswaList));
         rvMahasiswa.setLayoutManager(new LinearLayoutManager(this));
     }

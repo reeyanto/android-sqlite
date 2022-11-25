@@ -1,10 +1,9 @@
 package com.reeyanto.androidsqlite.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.reeyanto.androidsqlite.FormActivity;
-import com.reeyanto.androidsqlite.MainActivity;
 import com.reeyanto.androidsqlite.R;
 import com.reeyanto.androidsqlite.helpers.DatabaseHelper;
 import com.reeyanto.androidsqlite.models.Mahasiswa;
@@ -52,10 +48,19 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
         holder.tvLatLong.setText(String.format("%s\t\t: %s, %s", "LatLong", mahasiswa.getLatitude().toString(), mahasiswa.getLongtitude().toString()));
 
         holder.btnDelete.setOnClickListener(view -> {
-            DatabaseHelper db = new DatabaseHelper(context);
-            if(db.deleteMahasiswa(mahasiswaList.get(position)) > 0) {
-                Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
-            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Konfirmasi")
+                    .setMessage("Yakin ingin menghapus data ini?")
+                    .setPositiveButton("OK", (dialogInterface, i) -> {
+                        DatabaseHelper db = new DatabaseHelper(context);
+                        if(db.deleteMahasiswa(mahasiswaList.get(position)) > 0) {
+                            Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("Tidak", ((dialogInterface, i) -> {
+                        // do nothing
+                    }))
+                    .create().show();
         });
 
         holder.btnEdit.setOnClickListener(view -> {

@@ -55,7 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String sql = "SELECT * FROM "+ TABLE_NAME;
         if (keyword != null) {
-            sql += " WHERE nim LIKE '%"+ keyword + "%' OR nama LIKE '%"+ keyword + "%'";
+            sql += " WHERE nama LIKE '%"+ keyword + "%' OR jurusan LIKE '%"+ keyword + "%'";
         }
 
         SQLiteDatabase reader = this.getReadableDatabase();
