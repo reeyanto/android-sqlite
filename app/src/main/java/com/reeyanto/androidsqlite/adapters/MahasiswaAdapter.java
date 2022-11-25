@@ -2,6 +2,8 @@ package com.reeyanto.androidsqlite.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +61,17 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
         holder.btnEdit.setOnClickListener(view -> {
             Intent intent = new Intent(context, FormActivity.class);
             intent.putExtra("EDIT_USER", mahasiswaList.get(position));
+
+            if (intent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(intent);
+            } else {
+                Toast.makeText(context, "Aplikasi maps atau browser tidak tersedia", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.btnMaps.setOnClickListener(view -> {
+            String latLong = String.format("%s,%s,%s", mahasiswa.getLatitude(), mahasiswa.getLongtitude(), "20z");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/@" + latLong));
             context.startActivity(intent);
         });
     }
@@ -70,9 +83,8 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvNim, tvNama, tvJurusan, tvLatLong, tvNetworkConnection;
-        private CardView cardView;
-        private Button btnEdit, btnDelete;
+        private TextView tvNim, tvNama, tvJurusan, tvLatLong;
+        private Button btnEdit, btnDelete, btnMaps;
 
         public ViewHolder(@NonNull View view) {
             super(view);
@@ -81,10 +93,10 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
             tvNama = view.findViewById(R.id.tv_nama);
             tvJurusan = view.findViewById(R.id.tv_jurusan);
             tvLatLong = view.findViewById(R.id.tv_lat_long);
-            cardView = view.findViewById(R.id.cardView);
 
             btnEdit = view.findViewById(R.id.btnEdit);
             btnDelete = view.findViewById(R.id.btnDelete);
+            btnMaps = view.findViewById(R.id.btnMaps);
         }
     }
 }
