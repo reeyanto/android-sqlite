@@ -14,4 +14,6 @@
     <string name="maps">Maps</string>
     <string name="analyze">Analyze</string>
     <string name="jumlah">100</string>
+    <string name="search">Search</string>
+    <string name="masukkan_kata_kunci_pencarian">Masukkan kata kunci pencarian</string>
 </resources>

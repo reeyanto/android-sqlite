@@ -6,10 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/et_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_search"
+        android:hint="@string/masukkan_kata_kunci_pencarian"
+        android:autofillHints="@string/masukkan_kata_kunci_pencarian"
+        android:layout_margin="16dp"
+        android:background="@drawable/et_background"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <ImageButton
+        android:id="@+id/btn_search"
+        app:layout_constraintStart_toEndOf="@id/et_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_mahasiswa"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_search"
+        android:background="@drawable/btn_background"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_mahasiswa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
