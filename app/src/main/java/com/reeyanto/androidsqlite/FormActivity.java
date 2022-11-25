@@ -25,7 +25,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText etNim, etNama, etJurusan;
     private Button btnSave;
     private String nim, nama, jurusan;
-    private double latitude, longitude;
+    private double latitude = 0.0, longitude = 0.0;
     private final static int REQUEST_CODE = 200;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -63,8 +63,10 @@ public class FormActivity extends AppCompatActivity {
             }
         } else {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, location -> {
-                latitude = location.getLatitude();
-                longitude= location.getLongitude();
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude= location.getLongitude();
+                }
             });
         }
     }
