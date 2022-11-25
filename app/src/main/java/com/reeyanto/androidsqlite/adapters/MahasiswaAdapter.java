@@ -5,14 +5,18 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.reeyanto.androidsqlite.MainActivity;
 import com.reeyanto.androidsqlite.R;
+import com.reeyanto.androidsqlite.helpers.DatabaseHelper;
 import com.reeyanto.androidsqlite.models.Mahasiswa;
 
 import java.util.ArrayList;
@@ -42,6 +46,13 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
         holder.tvNama.setText(mahasiswa.getNama());
         holder.tvJurusan.setText(mahasiswa.getJurusan());
         holder.tvLatLong.setText(String.format("%s, %s", mahasiswa.getLatitude().toString(), mahasiswa.getLongtitude().toString()));
+
+        holder.btnDelete.setOnClickListener(view -> {
+            DatabaseHelper db = new DatabaseHelper(context);
+            if(db.deleteMahasiswa(mahasiswaList.get(position)) > 0) {
+                Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -53,6 +64,7 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
 
         private TextView tvNim, tvNama, tvJurusan, tvLatLong, tvNetworkConnection;
         private CardView cardView;
+        private Button btnEdit, btnDelete;
 
         public ViewHolder(@NonNull View view) {
             super(view);
@@ -63,6 +75,9 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
             tvLatLong = view.findViewById(R.id.tv_lat_long);
             tvNetworkConnection = view.findViewById(R.id.tv_network_connection);
             cardView = view.findViewById(R.id.cardView);
+
+            btnEdit = view.findViewById(R.id.btnEdit);
+            btnDelete = view.findViewById(R.id.btnDelete);
         }
     }
 }
