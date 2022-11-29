@@ -55,6 +55,9 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
                         DatabaseHelper db = new DatabaseHelper(context);
                         if(db.deleteMahasiswa(mahasiswaList.get(position)) > 0) {
                             Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
+                            mahasiswaList.clear();
+                            mahasiswaList.addAll(db.getAllMahasiswa(null));
+                            notifyDataSetChanged();
                         }
                     })
                     .setNegativeButton("Tidak", ((dialogInterface, i) -> {
