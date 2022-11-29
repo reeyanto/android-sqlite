@@ -3,6 +3,7 @@ package com.reeyanto.androidsqlite;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,13 +27,38 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rvMahasiswa;
     private FloatingActionButton fabAdd;
     private ArrayList<Mahasiswa> mahasiswaList;
-    private EditText etSearch;
-    private ImageButton btnSearch;
-    private static final String TAG = "MainActivity";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initComponents();
+        fabAdd.setOnClickListener(view -> openFormActivity());
+
+        getDataFromDatabase(null);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.option_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.option_menu_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String keyword) {
+                mahasiswaList.clear();
+                getDataFromDatabase(keyword);
+                setRecyclerView();
+                return true;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -42,18 +68,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, AnalyzeActivity.class));
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initComponents();
-        fabAdd.setOnClickListener(view -> openFormActivity());
-        btnSearch.setOnClickListener(view -> getDataFromDatabase(etSearch.getText().toString().trim()));
-
-        getDataFromDatabase(null);
     }
 
     @Override
@@ -73,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         setRecyclerView();
     }
 
-    private void setRecyclerView() {
+    public void setRecyclerView() {
         rvMahasiswa.setHasFixedSize(false);
         rvMahasiswa.setAdapter(new MahasiswaAdapter(this, mahasiswaList));
         rvMahasiswa.setLayoutManager(new LinearLayoutManager(this));
@@ -85,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        etSearch = findViewById(R.id.et_search);
-        btnSearch = findViewById(R.id.btn_search);
         rvMahasiswa = findViewById(R.id.rv_mahasiswa);
         fabAdd = findViewById(R.id.fab_add);
     }
